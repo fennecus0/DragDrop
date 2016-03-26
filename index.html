@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jquery</title>
+  <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+</head>
+<body>
+<div class="gray-block">
+  <div class="popover">
+    <button type="button" class="btn-popover-x">X</button>
+    <input type="text" id="addtext" placeholder="What needs to be done?">
+  </div>
+</div>
+  <div id="todos">
+    <h1>Todos</h1>
+    <div id="header">
+      <span class="todoBlockAll"><a class="btn-all" id="btn-checkall" type="button">CheckAll</a></span>
+      <input type="text" id="globalText" placeholder="What needs to be done?">
+    </div>
+    <div id="main">
+      <ul id="form"></ul>
+    </div>
+    <div id="footer">
+      <div class="todoCountAll">
+        <i></i> item left
+      </div>
+      <ul class="filters">
+        <li><button type="button" class="btn-danger">All</button></li>
+        <li><button type="button" class="btn-green">Active</button></li>
+        <li><button type="button" class="btn-gray">Completed</button></li>
+        <li><button type="button" class="btn-yellow">Clear completed</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/jquery-sortable/source/js/jquery-sortable.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

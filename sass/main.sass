@@ -1,0 +1,256 @@
+body
+  font-family: 'Helvetica'
+  &.dragging
+    cursor: move !important
+  &.dragging *
+    cursor: move !important
+
+.dragged
+  position: relative
+  opacity: 0.5
+  z-index: 2000
+  top: -100px
+
+#todos
+  display: block
+  position: relative
+  width: 600px
+  margin: 100px auto
+
+h1
+  font-size: 32px
+  font-weight: 700
+  color: red
+  text-align: center
+  text-transform: uppercase
+
+#header
+  display: table
+  width: 100%
+  border: 1px solid #d9d9d9
+
+  .todoBlockAll
+    display: table-cell
+    vertical-align: middle
+    .btn-all
+      background: #3498db
+      background-image: -webkit-linear-gradient(top, #3498db, #2980b9)
+      background-image: -moz-linear-gradient(top, #3498db, #2980b9)
+      background-image: -ms-linear-gradient(top, #3498db, #2980b9)
+      background-image: -o-linear-gradient(top, #3498db, #2980b9)
+      background-image: linear-gradient(to bottom, #3498db, #2980b9)
+      color: #ffffff
+      font-size: 20px
+      padding: 10px 20px 10px 20px
+      text-decoration: none
+      cursor: pointer
+      &:hover
+        background: #3cb0fd
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db)
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db)
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db)
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db)
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db)
+        text-decoration: none
+
+
+
+  #globalText
+    display: table-cell
+    height: 40px
+    width: 100%
+    font-size: 26px
+    border: none
+    outline: 0
+
+
+.btn-danger
+  border-radius: 7px
+  color: #ffffff
+  font-size: 20px
+  background: #d93434
+  padding: 6px 12px
+  text-decoration: none
+  cursor: pointer
+  border: none
+  &:hover
+    background: #fc3c3c
+    text-decoration: none
+
+
+.btn-green
+  -webkit-border-radius: 28
+  -moz-border-radius: 28
+  border-radius: 7px
+  color: #ffffff
+  font-size: 20px
+  background: #4fd934
+  padding: 6px 12px
+  text-decoration: none
+  cursor: pointer
+  border: none
+  &:hover
+    background: #45fa3c
+    text-decoration: none
+
+
+.btn-gray
+  -webkit-border-radius: 28
+  -moz-border-radius: 28
+  border-radius: 7px
+  color: #000000
+  font-size: 20px
+  background: rgba(204, 204, 204, 1)
+  padding: 6px 12px
+  text-decoration: none
+  cursor: pointer
+  border: none
+  &:hover
+    background: #919191
+    text-decoration: none
+
+
+.btn-yellow
+  display: none
+  border-radius: 7px
+  color: #000000
+  font-size: 20px
+  background: #f7ff17
+  padding: 6px 12px
+  text-decoration: none
+  cursor: pointer
+  border: none
+  &:hover
+    background: #fae13c
+    text-decoration: none
+
+.btn-popover-x
+  display: block
+  position: absolute
+  top: -40px
+  right: -40px
+  font-size: 28px
+  font-weight: 700
+  color: #d93434
+  height: 20px
+  width: 20px
+  background: none
+  border: none
+  outline: 0
+  cursor: pointer
+  &:hover
+    color: #ffffff
+
+.btn-x
+  display: none
+  position: absolute
+  right: 10px
+  top: 0
+  font-size: 28px
+  color: #d93434
+  height: 20px
+  width: 20px
+  background: none
+  border: none
+  outline: 0
+
+  &:hover
+    color: #000
+
+.btn-edit
+  display: none
+  position: absolute
+  right: 40px
+  top: 10px
+  font-size: 28px
+  color: #d93434
+  height: 20px
+  width: 20px
+  background: url("../images/edit.png")
+  background-size: 100%
+  border: none
+  outline: 0
+  cursor: pointer
+
+#main
+  display: block
+  width: 100%
+  border: 1px solid #d9d9d9
+
+  #form
+    list-style: none
+    padding: 0
+    margin: 0
+    li
+      position: relative
+      &:hover
+        .btn-x
+          display: block
+        .btn-edit
+          display: block
+
+
+
+#footer
+  display: block
+  width: 100%
+  border: 1px solid #d9d9d9
+  .todoCountAll
+    display: block
+    float: left
+    font-size: 20px
+    font-weight: 700
+    width: 150px
+    padding: 6px
+
+  .filters
+    list-style: none
+    li
+      display: inline-block
+
+
+
+
+input:checked + span
+  text-decoration: line-through
+
+input[type="checkbox"]
+  height: 26px
+  width: 26px
+
+
+label
+  font-size: 28px
+
+
+.checkBlock
+  height: 40px
+  border: 1px solid #d9d9d9
+
+
+#main, #footer, .li-active, .li-completed
+  display: none
+
+.popover
+  display: none
+  position: absolute
+  width: 300px
+  height: 300px
+  top: 100px
+  right: 0
+  left: 0
+  background-color: white
+  border: 5px solid #cccccc
+  border-radius: 10px
+  margin: 0 auto
+  z-index: 2
+
+.gray-block
+  display: none
+  top: 0
+  left: 0
+  position: absolute
+  width: 100vw
+  height: 100vh
+  background-color: rgba(0,0,0,.8)
+  z-index: 1
