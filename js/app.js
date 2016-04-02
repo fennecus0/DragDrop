@@ -1,11 +1,13 @@
-$(document).ready(function(){
+$(window).load(function(){
+    localStorageOut();
+
     $("#globalText").keypress(function(event) {
         var text = $(this).val();
         if ( event.which == 13 ) {
             schowMain();
 
             if (text !== '') {
-                $('#form').append('<li class="">'
+                $('#form').append('<li>'
                     +'<div class="checkBlock">'
                     + '<label>'
                     + '<input type="checkbox" id="checkInput">'
@@ -14,15 +16,21 @@ $(document).ready(function(){
                     + '</div>'
                     + '<button type="button" class="btn-edit"></button>'
                     + '<button type="button" class="btn-x">x</button>'
+                    + '<div class="popover" id="popover">'
+                    + '<button type="button" class="btn-popover-x">X</button>'
+                    + '<input type="text" id="addtext" placeholder="What needs to be done?">'
+                    + '</div>'
                     + '</li>');
                 $(this).val('');
             }
+            localStorageIn();
             countItemCheck();
         }
 
         $('.btn-x').click(function() {
             $(this).parent().remove();
             countItemCheck();
+            hideMain();
         });
         $('.btn-edit').click(function() {
             $('.gray-block').show();
@@ -36,22 +44,34 @@ $(document).ready(function(){
     $('#btn-checkall').click(function() {
         checkAllOut();
         countItemCheck();
+        showBtnCompleted();
     });
-    $('.btn-yellow').click(function() {
-        $('#form').empty();
+    $('.btn-clear-completed').click(function() {
+        var formCheckbox = $('li input:checkbox');
+
+        for (var i = 0; i < formCheckbox.length; i++) {
+            if (formCheckbox[i].checked == true){
+                $('#form li')[i].remove();
+                countItemCheck();
+                localStorageIn();
+            }
+
+        }
         hideMain();
-        countItemCheck();
+        /*$('#form').empty();
+        hideMain();*/
+
     });
-    $('.btn-danger').click(function() {
+    $('.btn-show-all').click(function() {
         $('li').removeClass('li-active');
         $('li').removeClass('li-completed');
         countItemCheck();
     });
-    $('.btn-green').click(function() {
+    $('.btn-active').click(function() {
         showActive();
         countItemCheck();
     });
-    $('.btn-gray').click(function() {
+    $('.btn-completed').click(function() {
         showCompleted();
         countItemCheck();
     });
@@ -99,13 +119,33 @@ $(document).ready(function(){
         }
     }
 
-    /*    function hideMain() {
-     $('#main').hide();
-     $('#footer').hide();
-     }*/
+    function showBtnCompleted(){
+        if($('.li-completed').length > 0){
+            $('.btn-clear-completed').show();
+        }
+    }
 
+    function localStorageIn() {
+        if ($("#form").html() !== null) {
+            localStorage["myKey"] = JSON.stringify($("#form").html());
+        }
+    }
+    function localStorageOut() {
+        if (localStorage["myKey"] != null) {
+            $("#form").html(JSON.parse(localStorage["myKey"]));
+        }
+    }
+    function hideMain() {
+        if ($('li input:checkbox').length == 0) {
+            $('#main').hide();
+            $('#footer').hide();
+        }
+    }
 
     $(function() {
         $("ul#form").sortable();
     });
+
+
+
 });
