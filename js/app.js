@@ -16,10 +16,6 @@ $(window).load(function(){
                     + '</div>'
                     + '<button type="button" class="btn-edit"></button>'
                     + '<button type="button" class="btn-x">x</button>'
-                    + '<div class="popover" id="popover">'
-                    + '<button type="button" class="btn-popover-x">X</button>'
-                    + '<input type="text" id="addtext" placeholder="What needs to be done?">'
-                    + '</div>'
                     + '</li>');
                 $(this).val('');
             }
@@ -29,6 +25,7 @@ $(window).load(function(){
 
         $('.btn-x').click(function() {
             $(this).parent().remove();
+            localStorageIn();
             countItemCheck();
             hideMain();
         });
@@ -36,10 +33,7 @@ $(window).load(function(){
             $('.gray-block').show();
             $('.popover').show();
         });
-        $('.btn-popover-x').click(function() {
-            $('.gray-block').hide();
-            $('.popover').hide();
-        });
+
     });
     $('#btn-checkall').click(function() {
         checkAllOut();
@@ -75,7 +69,20 @@ $(window).load(function(){
         showCompleted();
         countItemCheck();
     });
-
+    $('.btn-popover-x').click(function() {
+        $('.gray-block').hide();
+        $('.popover').hide();
+    });
+    $('.btn-x').click(function() {
+        $(this).parent().remove();
+        localStorageIn();
+        countItemCheck();
+        hideMain();
+    });
+    $('.btn-edit').click(function() {
+        $('.gray-block').show();
+        $('.popover').show();
+    });
 
     function schowMain() {
         $('#main').show();
@@ -127,12 +134,16 @@ $(window).load(function(){
 
     function localStorageIn() {
         if ($("#form").html() !== null) {
-            localStorage["myKey"] = JSON.stringify($("#form").html());
+            /*localStorage["myKey"] = JSON.stringify($("#form").html());*/
+            localStorage.setItem('myKey', $("#form").html());
+            countItemCheck();
         }
     }
     function localStorageOut() {
         if (localStorage["myKey"] != null) {
-            $("#form").html(JSON.parse(localStorage["myKey"]));
+            /*$("#form").html(JSON.parse(localStorage["myKey"]));*/
+            $("#form").html(localStorage.getItem('myKey'));
+            countItemCheck();
         }
     }
     function hideMain() {

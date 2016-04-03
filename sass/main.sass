@@ -124,7 +124,8 @@ h1
 .btn-popover-x
   display: block
   position: absolute
-  right: 10px
+  top: -40px
+  right: -40px
   font-size: 28px
   font-weight: 700
   color: #d93434
@@ -137,6 +138,22 @@ h1
   &:hover
     color: #ffffff
 
+.btn-submit
+  position: relative
+  width: 95px
+  height: 100%
+  float: right
+  border-radius: 7px
+  color: #ffffff
+  font-size: 20px
+  background: #d93434
+  padding: 6px 12px
+  text-decoration: none
+  cursor: pointer
+  border: none
+  &:hover
+    background: #fc3c3c
+    text-decoration: none
 .btn-x
   display: none
   position: absolute
@@ -218,21 +235,23 @@ label
   border: 1px solid #d9d9d9
 
 #main, #footer, .li-active, .li-completed
-  display: none
+  display: block
 
 .popover
   display: none
   position: absolute
-  width: 300px
+  width: 350px
   height: 50px
-  bottom: 0px
-  background-color: #fff
-  border: 5px solid #3cb0fd
+  top: 100px
+  right: 0
+  left: 0
+  background-color: white
+  border: 5px solid #cccccc
   border-radius: 10px
+  margin: 0 auto
   z-index: 2
-  left: 200px
   input
-    width: 80%
+    width: 250px
     height: 45px
     font-size: 20px
 
@@ -240,11 +259,8 @@ label
   display: none
   top: 0
   left: 0
-  bottom: 0
-  right: 0
   position: absolute
-  width: 100%
-  height: 100%
+  width: 100vw
+  height: 100vh
   background-color: rgba(0,0,0,.8)
   z-index: 1
-
