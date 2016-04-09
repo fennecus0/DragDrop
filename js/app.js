@@ -1,4 +1,6 @@
 $(window).load(function(){
+
+    var span;
     localStorageOut();
 
     $("#globalText").keypress(function(event) {
@@ -22,19 +24,12 @@ $(window).load(function(){
             localStorageIn();
             countItemCheck();
         }
-
         $('.btn-x').click(function() {
             $(this).parent().remove();
             localStorageIn();
             countItemCheck();
             hideMain();
         });
-       /* $('.btn-edit').click(function() {
-            editInput();
-            /!*$('.gray-block').show();
-            $('.popover').show();*!/
-        });*/
-
     });
     $('#btn-checkall').click(function() {
         checkAllOut();
@@ -80,10 +75,13 @@ $(window).load(function(){
         countItemCheck();
         hideMain();
     });
-    /*$('.btn-edit').click(function() {
-        $('.gray-block').show();
-        $('.popover').show();
-    });*/
+    $('#form').click(editValue);
+    $('.btn-submit').click(function() {
+        span.html($('#addtext').val());
+        localStorageIn();
+        $('.gray-block').hide();
+        $('.popover').hide();
+    });
 
     function schowMain() {
         $('#main').show();
@@ -126,13 +124,11 @@ $(window).load(function(){
             $('#form input').prop( "checked", true );
         }
     }
-
     function showBtnCompleted(){
         if($('.li-completed').length > 0){
             $('.btn-clear-completed').show();
         }
     }
-
     function localStorageIn() {
         if ($("#form").html() !== null) {
             /*localStorage["myKey"] = JSON.stringify($("#form").html());*/
@@ -153,39 +149,16 @@ $(window).load(function(){
             $('#footer').hide();
         }
     }
-
     $(function() {
         $("ul#form").sortable();
     });
-
-
- /*   function editInput() {
-        var container = $('#form');
-
-        container.onclick = function(event) {
-            if (!event.target.classList.contains('btn-edit')) return;
-
-            event.target.parentNode.hidden = !event.target.parentNode.hidden;
-        }
-    }*/
-
-    function handler(event) {
+    function editValue(event) {
         var target = $(event.target);
-        var span;
          if (target.is(".btn-edit")) {
-            span = target.siblings().find('span').html();
-            $('#addtext').val(span);
+            span = target.siblings().find('span');
+            $('#addtext').val(span.html());
             $('.gray-block').show();
             $('.popover').show();
         }
     }
-
-    $('#form').click(handler);
-
-    /*$('.btn-submit').click(function() {
-        $('.gray-block').hide();
-        $('.popover').hide();
-    });*/
-
-
 });
