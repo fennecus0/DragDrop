@@ -1,11 +1,16 @@
 $(window).load(function(){
 
     var span;
-    localStorageOut();
+    var data = localStorageOut();
+    data.forEach(function(el) {
+        addElement(null, el.name);
+    });
 
-    $("#globalText").keypress(function(event) {
-        var text = $(this).val();
-        if ( event.which == 13 ) {
+    $("#globalText").keypress(addElement);
+
+    function addElement(event, hardcodedText) {
+        var text = event ? $(event.target).val() : hardcodedText;
+        if ( event && event.which == 13 || hardcodedText ) {
             schowMain();
 
             if (text !== '') {
@@ -19,18 +24,21 @@ $(window).load(function(){
                     + '<button type="button" class="btn-edit"></button>'
                     + '<button type="button" class="btn-x">x</button>'
                     + '</li>');
-                $(this).val('');
+                if (event) {
+                    $(event.target).val('');
+                    localStorageIn(text);
+                }
             }
-            localStorageIn();
             countItemCheck();
         }
-        $('.btn-x').click(function() {
-            $(this).parent().remove();
+        $('.btn-x').click(function(event) {
+            $(event.target).parent().remove();
             localStorageIn();
             countItemCheck();
             hideMain();
         });
-    });
+    }
+
     $('#btn-checkall').click(function() {
         checkAllOut();
         countItemCheck();
@@ -49,7 +57,7 @@ $(window).load(function(){
         }
         hideMain();
         /*$('#form').empty();
-        hideMain();*/
+         hideMain();*/
 
     });
     $('.btn-show-all').click(function() {
@@ -129,20 +137,22 @@ $(window).load(function(){
             $('.btn-clear-completed').show();
         }
     }
-    function localStorageIn() {
-        if ($("#form").html() !== null) {
-            /*localStorage["myKey"] = JSON.stringify($("#form").html());*/
-            localStorage.setItem('myKey', $("#form").html());
-            countItemCheck();
-        }
+
+
+
+
+    function localStorageIn(text) {
+        var data = localStorageOut();
+        data.push({'name': text});
+        localStorage.setItem('todos', JSON.stringify(data));
     }
+
     function localStorageOut() {
-        if (localStorage["myKey"] != null) {
-            /*$("#form").html(JSON.parse(localStorage["myKey"]));*/
-            $("#form").html(localStorage.getItem('myKey'));
-            countItemCheck();
-        }
+        return JSON.parse(localStorage.getItem('todos')) || [];
     }
+
+
+
     function hideMain() {
         if ($('li input:checkbox').length == 0) {
             $('#main').hide();
@@ -154,7 +164,7 @@ $(window).load(function(){
     });
     function editValue(event) {
         var target = $(event.target);
-         if (target.is(".btn-edit")) {
+        if (target.is(".btn-edit")) {
             span = target.siblings().find('span');
             $('#addtext').val(span.html());
             $('.gray-block').show();
